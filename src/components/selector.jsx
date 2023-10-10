@@ -1,45 +1,51 @@
 import { Database } from "../data/database"
 import { useState } from "react"
 
+
 export default function Selector() {
 
     const [selectedData, setSelectedData] = useState(false);
-
+    const [openMenu, setOpenMenu] = useState(false)
 
     function dataSelect(event) {
         console.log("estás seleccionando una opción")
         setSelectedData(Database[event.target.value])
     }
 
+    const toggleMenu = () => {
+        setOpenMenu(!openMenu)
+    }
+
+
     return (
-        <div >
+        <div>
+            <div className="ButtonClass">
+                <button onClick={toggleMenu}> Selecciona algún curso</button>
+            </div>
+                <nav className={`Opening-nav ${openMenu ? 'isActive' : ''}`}>
+                    <ul>
+                        {Database.map((element, id) => {
+                            return (
+                                <li value={id} key={id} onClick={dataSelect} defaultValue="default" className="Cabecera-li">
+                                    {element.name}
+                                    <img src={element.img} width="20px"></img>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </nav>
 
-            <select onChange={dataSelect} defaultValue="default">
-                <option disabled value="default" hidden>Choose an option</option>
-                {Database.map((element, id) => {
-                    return (
-                        <>
-                            <option value={id} key={id}>
 
-                                {element.name}
-
-                            </option>
-                        </>
-                    )
-                })}
-            </select>
             <div className="select">
                 {selectedData ?
                     <>
                         <div className="idSelector">El ID del curso es: {selectedData.id}</div>
                         <h1>{selectedData.name}</h1>
-                        <h2>{selectedData?.description}</h2>
+                        <h3>{selectedData?.description}</h3>
                         <img className="image" src={selectedData.img} />
                     </>
                     :
-                    <div className="ternario">
-                        <h1>Selecciona un curso</h1>
-                    </div>
+                    ""
                 }
             </div>
         </div>
