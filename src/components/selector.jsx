@@ -20,7 +20,15 @@ export default function Selector() {
     return (
         <div>
             <div className="Button">
-                <button onClick={toggleMenu}> Selecciona algún curso</button>
+                <button onClick={toggleMenu}>
+               { selectedData ? 
+               <>
+                {selectedData.name}
+               </>
+:
+"Selecciona algún curso"
+               }
+                 </button>
             </div>
             <nav className={`Opening-nav ${openMenu ? 'isActive' : ''}`}>
                 <ul>
