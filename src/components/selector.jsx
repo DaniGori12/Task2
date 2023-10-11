@@ -19,24 +19,23 @@ export default function Selector() {
 
     return (
         <div>
-            <div className="ButtonClass">
+            <div className="Button">
                 <button onClick={toggleMenu}> Selecciona algún curso</button>
             </div>
-                <nav className={`Opening-nav ${openMenu ? 'isActive' : ''}`}>
-                    <ul>
-                        {Database.map((element, id) => {
-                            return (
-                                <li value={id} key={id} onClick={dataSelect} defaultValue="default" className="Cabecera-li">
-                                    {element.name}
-                                    <img src={element.img} width="20px"></img>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </nav>
+            <nav className={`Opening-nav ${openMenu ? 'isActive' : ''}`}>
+                <ul>
+                    {Database.map((element, id) => {
+                        return (
+                            <li value={id} key={id} onClick={dataSelect} defaultValue="default">
+                                {element.name}
+                                <img src={element.img} width="25px"></img>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </nav>
 
-
-            <div className="select">
+            <div className="Body">
                 {selectedData ?
                     <>
                         <div className="idSelector">El ID del curso es: {selectedData.id}</div>
